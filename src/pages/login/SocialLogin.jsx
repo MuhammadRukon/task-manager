@@ -14,10 +14,7 @@ const SocialLogin = ({ setErrorMessage }) => {
       .then((res) => {
         const email = res.user.email;
         console.log(email);
-        toast.success("Successfully Signed In", {
-          position: "top-right",
-          autoClose: 2000,
-        });
+        alert("logged In");
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => setErrorMessage(error.message));

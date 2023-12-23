@@ -16,6 +16,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const [effect, setEffect] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -65,6 +66,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleSignIn,
     updateUserProfile,
+    effect,
+    setEffect,
   };
 
   return (

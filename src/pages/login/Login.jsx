@@ -18,9 +18,7 @@ const Login = () => {
     logInUser(email, password)
       .then((res) => {
         console.log(res.user);
-        toast.success("Successfully Signed In", {
-          autoClose: 2000,
-        });
+        alert("logged in");
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => setErrorMessage(error.message));

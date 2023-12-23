@@ -2,10 +2,11 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import defaultUser from "../../assets/defaultUser.png";
+import useAuth from "../../hooks/useAuth";
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   return (
     <div className="relative">
@@ -21,7 +22,7 @@ const MenuDropdown = () => {
             <img
               className="rounded-full"
               referrerPolicy="no-referrer"
-              src={defaultUser}
+              src={user ? user.photoURL : defaultUser}
               alt="profile"
               height="30"
               width="30"
@@ -53,20 +54,29 @@ const MenuDropdown = () => {
               Contact
               <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
             </Link>
-            <Link
-              to="/login"
-              className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold"
-            >
-              login
-              <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
-            </Link>
-            <Link
-              to="/register"
-              className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold"
-            >
-              register
-              <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
-            </Link>
+            {user ? (
+              <button className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold">
+                logout
+                <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
+              </button>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold"
+                >
+                  login
+                  <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
+                </Link>
+                <Link
+                  to="/register"
+                  className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold"
+                >
+                  register
+                  <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

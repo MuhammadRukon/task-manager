@@ -1,7 +1,7 @@
 import { useState } from "react";
 // Icons
 import { GrLogout } from "react-icons/gr";
-import { AiOutlineBars, AiFillHome, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineBars, AiFillHome } from "react-icons/ai";
 import defaultUser from "../../assets/defaultUser.png";
 
 // components
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
+  const { user } = useAuth();
   const [isActive, setActive] = useState(false);
   const handleToggle = () => {
     setActive(!isActive);
@@ -44,13 +45,14 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-primary mx-auto">
-              <Link to="/">
-                <p className="font-integralCf text-[white] font-bold text-2xl">
-                  Task
-                </p>
-              </Link>
-            </div>
+            <Link
+              to={"/"}
+              className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-primary mx-auto"
+            >
+              <p className="font-integralCf text-[white] font-bold text-2xl">
+                Task
+              </p>
+            </Link>
           </div>
 
           {/* Nav Items */}
@@ -58,7 +60,7 @@ const Sidebar = () => {
             <nav>
               <MenuItem
                 icon={AiFillHome}
-                label="Home"
+                label="task-manager"
                 address="/task-manager"
               />
             </nav>
@@ -73,12 +75,14 @@ const Sidebar = () => {
                 <img
                   className="rounded-full bg-[white]"
                   referrerPolicy="no-referrer"
-                  src={defaultUser}
+                  src={user ? user.photoURL : defaultUser}
                   alt="profile"
                   height="30"
                   width="30"
                 />
-                <p className="text-lg font-semibold">user</p>
+                <p className="text-lg font-semibold">
+                  {user ? user.displayName : "No user"}
+                </p>
               </div>
             </div>
           </div>
@@ -88,7 +92,7 @@ const Sidebar = () => {
             <span
               onClick={() => {
                 logOut();
-                toast("signed out");
+                alert("logged out");
               }}
               className="mx-4 font-medium"
             >
