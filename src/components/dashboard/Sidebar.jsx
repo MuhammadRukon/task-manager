@@ -8,6 +8,7 @@ import defaultUser from "../../assets/defaultUser.png";
 import useAuth from "../../hooks/useAuth";
 import MenuItem from "./MenuItem";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -92,7 +93,7 @@ const Sidebar = () => {
             <span
               onClick={() => {
                 logOut();
-                alert("logged out");
+                toast.success("successfully logged out");
               }}
               className="mx-4 font-medium"
             >
