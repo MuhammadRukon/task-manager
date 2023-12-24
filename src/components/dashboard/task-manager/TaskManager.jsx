@@ -13,7 +13,7 @@ const TaskManager = () => {
         <div>
           <TodoLists />
         </div>
-        <div className="flex gap-6">
+        <div className="lg:flex gap-6">
           <Ongoing />
           <Complete />
         </div>

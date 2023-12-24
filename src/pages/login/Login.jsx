@@ -2,24 +2,28 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import MainLayout from "../../layout/MainLayout";
 import SocialLogin from "./SocialLogin";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const [errorMessage, setErrorMessage] = useState("");
 
+  const from = location?.state?.from?.pathname || "/";
+  console.log(from);
   // login with email and pass
   const handleLogin = (e) => {
     e.preventDefault();
     setErrorMessage("");
+
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     logInUser(email, password)
       .then((res) => {
         console.log(res.user);
-        alert("logged in");
-        navigate(location?.state ? location.state : "/");
+        toast.success("successfully logged in");
+        navigate(from);
       })
       .catch((error) => setErrorMessage(error.message));
   };

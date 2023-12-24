@@ -1,13 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MainLayout from "../../layout/MainLayout";
+
 import SocialLogin from "../login/SocialLogin";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const { createUser, updateUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   // login with email and pass
   const handleRegister = (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const Register = () => {
           toast.success("successfully signed up", {
             autoClose: 3000,
           });
-          updateUser(name, photo)
+          updateUserProfile(name, photo)
             .then(() => {
               navigate("/");
             })
@@ -99,7 +100,7 @@ const Register = () => {
                   className="input input-bordered focus:outline-none"
                 />
               </div>
-              <p className="text-red-700 ml-1 text-sm">{errorMessage}</p>
+              <p className="text-[red] ml-1 text-sm">{errorMessage}</p>
               <div className="form-control mt-6">
                 <button className="btn bg-primary text-[white]">
                   Register

@@ -6,7 +6,6 @@ import useAuth from "../../../hooks/useAuth";
 
 const TodoLists = () => {
   const { user, effect } = useAuth();
-  console.log(user?.email);
   const { data, refetch } = useQuery({
     queryKey: ["todo"],
     queryFn: async () =>
@@ -16,11 +15,11 @@ const TodoLists = () => {
     refetch();
   }, [user, effect]);
   return (
-    <div className="w-full p-10 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.1)]">
+    <div className="w-full  p-10 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.1)]">
       <h2 className="text-center font-bold font-primary text-2xl 2xl:text-4xl">
         To-Do List
       </h2>
-      <div className="px-5 2xl:px-0">
+      <div className="px-5 2xl:px-0 overflow-x-scroll lg:overflow-hidden">
         {data?.data?.length > 0 ? (
           <table className="mt-10 w-full mb-6 drop-shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-xl">
             <thead>
@@ -52,7 +51,7 @@ const TodoLists = () => {
               </tr>
             </thead>
 
-            <tbody className="rounded-xl">
+            <tbody className="rounded-xl ">
               {data?.data?.length &&
                 data?.data?.map((todo, index) => (
                   <TodoRow

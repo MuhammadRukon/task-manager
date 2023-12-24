@@ -4,6 +4,7 @@ import axiosInstance from "../../../api";
 import TodoRow from "../todoList/TodoRow";
 import { useDrop } from "react-dnd";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Ongoing = () => {
   const { user, effect, setEffect } = useAuth();
@@ -13,7 +14,6 @@ const Ongoing = () => {
       await axiosInstance(`/tasks?user=${user?.email}&status=ongoing`),
   });
   useEffect(() => {
-    console.log(effect, "outgoing before");
     refetch();
   }, [user, effect]);
   const [{ isOver }, drop] = useDrop(() => ({
@@ -22,7 +22,7 @@ const Ongoing = () => {
       const response = await addItemTosection(item.id);
       if (response.status === 200) {
         setEffect((prevEffect) => !prevEffect);
-        console.log(effect, "outgoing after");
+        toast.success("sucessfully listed as ongoing");
       }
     },
     collect: (monitor) => ({
@@ -34,12 +34,12 @@ const Ongoing = () => {
   return (
     <div
       ref={drop}
-      className="w-full p-10 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+      className="w-full  p-10 rounded-lg shadow-[0_0_10px_rgba(0,0,0,0.1)]"
     >
       <h2 className="text-center font-bold font-primary text-2xl 2xl:text-4xl">
         Ongoing List
       </h2>
-      <div className="px-5 2xl:px-0">
+      <div className="px-5 2xl:px-0 overflow-x-scroll lg:overflow-hidden">
         {data?.data?.length > 0 ? (
           <table className="mt-10 w-full mb-6 drop-shadow-[0_0_7px_rgba(0,0,0,0.2)] rounded-xl">
             <thead>

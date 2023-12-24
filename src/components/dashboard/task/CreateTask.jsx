@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axiosInstance from "../../../api";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const CreateTask = () => {
-  const { user, effect, setEffect } = useAuth();
+  const { user, setEffect } = useAuth();
   const navigate = useNavigate();
   const [priority, setPriority] = useState("Select Priority Level");
   //  refetch after adding task
@@ -35,9 +36,9 @@ const CreateTask = () => {
       e.target.reset();
       if (response.status === 200) {
         handleRefetch();
-        alert("Task successfully created");
+        toast.success(`sucessfully created task. Deadline ${deadline}`);
       } else {
-        alert("could not post.");
+        toast.error("could not create task");
       }
       navigate("/task-manager");
     } catch (error) {

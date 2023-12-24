@@ -7,9 +7,8 @@ import Register from "../pages/register/Register";
 import About from "../pages/about/About";
 import ContactUs from "../pages/contact/ContactUs";
 import DashboardLayout from "../layout/DashboardLayout";
-import TodoLists from "../components/dashboard/todoList/TodoLists";
-import axiosInstance from "../api";
 import TaskManager from "../components/dashboard/task-manager/TaskManager";
+import PrivateRoute from "./PrivateRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +39,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/task-manager",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,

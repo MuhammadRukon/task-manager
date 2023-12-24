@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import defaultUser from "../../assets/defaultUser.png";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,13 @@ const MenuDropdown = () => {
               <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
             </Link>
             {user ? (
-              <button className="group hover:bg-[#EFEFEF]  relative px-4 py-3 transition font-semibold">
+              <button
+                onClick={() => {
+                  logOut();
+                  toast.success("successfully logged out");
+                }}
+                className="group hover:bg-[#EFEFEF] text-left relative px-4 py-3 transition font-semibold"
+              >
                 logout
                 <div className="w-0 absolute left-[50%] bottom-0 group-hover:left-0 h-[2px] group-hover:w-full transition-all group-hover:bg-primary"></div>
               </button>
